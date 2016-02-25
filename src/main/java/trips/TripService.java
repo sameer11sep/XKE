@@ -6,7 +6,7 @@ import java.util.List;
 public class TripService {
 
     public List<Trip> getUserTrips(User user) throws NotLoggedInException {
-        User loggedInUser = SecurityContext.getLoggedInUser();
+        User loggedInUser = getLoggedInUser();
         if (loggedInUser != null) {
             boolean isFriend = false;
             for (User friend : user.getFriends()) {
@@ -16,12 +16,20 @@ public class TripService {
                 }
             }
             if (isFriend) {
-                TripDao.getTrips(user);
+                return tripsBy(user);
             }
         } else {
             throw new NotLoggedInException("You are not currently logged in..");
         }
         return new ArrayList<Trip>();
+    }
+
+    protected List<Trip> tripsBy(User user) {
+        return TripDao.getTrips(user);
+    }
+
+    protected User getLoggedInUser() {
+        return SecurityContext.getLoggedInUser();
     }
 
 }
