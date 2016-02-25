@@ -13,4 +13,7 @@ public class User {
         return friends;
     }
 
+    public List<Trip> getTrips() {
+        return trips;
+    }
 }
