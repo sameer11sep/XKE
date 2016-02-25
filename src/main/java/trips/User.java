@@ -16,4 +16,12 @@ public class User {
     public List<Trip> getTrips() {
         return trips;
     }
+
+    public void addTrip(Trip trip) {
+        this.trips.add(trip);
+    }
+
+    public void addFriend(User friend) {
+        this.friends.add(friend);
+    }
 }
